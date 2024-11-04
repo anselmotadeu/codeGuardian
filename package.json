@@ -19,6 +19,7 @@
     "cors": "^2.8.5",
     "express": "^4.21.1",
     "github-linguist": "^2.4.4",
+    "lang-detector": "^1.0.6",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
