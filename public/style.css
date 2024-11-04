@@ -1,0 +1,20 @@
+.success-message {
+    color: green;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .error-message {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  ul {
+    margin-top: 10px;
+  }
+  
+  ul li {
+    margin: 5px 0;
+  }
+  
