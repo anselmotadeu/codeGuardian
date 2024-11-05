@@ -111,6 +111,73 @@ npm start
 - Certifique-se de estar no ambiente virtual Python antes de iniciar o servidor.
 - Atualize as dependências regularmente com `npm install` e `pip install`.
 
+## Funcionalidades Futuras Planejadas
+
+### Melhorias na Interface
+
+1. **Adicionar Cabeçalho e Rodapé**
+   - Cabeçalho com o nome do projeto e slogan
+   - Rodapé com links úteis (documentação, contribuições, contato)
+
+2. **Temas e Paletas de Cores**
+   - Escolher uma paleta de cores consistente
+   - Oferecer tema claro e escuro
+
+3. **Layout Responsivo**
+   - Garantir que a aplicação funcione bem em diferentes tamanhos de tela (desktop, tablet, smartphone)
+
+### Funcionalidades Adicionais
+
+1. **Configurações de Lint**
+   - Permitir ao usuário ajustar regras e configurações do lint
+
+2. **Exportar Resultados**
+   - Oferecer opção de exportar resultados para PDF ou texto
+
+3. **Histórico de Análises**
+   - Exibir histórico de análises realizadas para referência futura
+
+4. **Notificações e Feedback Visual**
+   - Adicionar notificações visuais para mostrar o progresso da análise ou alertar sobre problemas
+   - Mostrar animações suaves ao realizar ações, como clicar em botões ou carregar resultados
+
+5. **Funcionalidade de Login**
+   - Adicionar funcionalidade de login para usuários, permitindo personalização e salvamento de configurações
+
+### Priorização das Funcionalidades
+
+1. **Subir Implementação Atual**
+2. **Adicionar Menu ao Cabeçalho**
+3. **Implementar Configurações de Lint**
+4. **Implementar Exportação de Resultados**
+5. **Adicionar Histórico de Análises**
+6. **Adicionar Notificações e Feedback Visual**
+7. **Adicionar Funcionalidade de Login**
+
+### Funcionalidades Concluídas
+
+- [x] **Adicionar Cabeçalho e Rodapé**
+- [x] **Adicionar Menu ao Cabeçalho e Centralizar**
+- [ ] **Temas e Paletas de Cores**
+  - Escolher uma paleta de cores consistente
+  - Oferecer tema claro e escuro
+- [ ] **Layout Responsivo**
+  - Garantir que a aplicação funcione bem em diferentes tamanhos de tela (desktop, tablet, smartphone)
+- [ ] **Configurações de Lint**
+  - Permitir ao usuário ajustar regras e configurações do lint
+- [ ] **Exportar Resultados**
+  - Oferecer opção de exportar resultados para PDF ou texto
+- [ ] **Histórico de Análises**
+  - Exibir histórico de análises realizadas para referência futura
+- [ ] **Notificações e Feedback Visual**
+  - Adicionar notificações visuais para mostrar o progresso da análise ou alertar sobre problemas
+  - Mostrar animações suaves ao realizar ações, como clicar em botões ou carregar resultados
+- [ ] **Funcionalidade de Login**
+  - Adicionar funcionalidade de login para usuários, permitindo personalização e salvamento de configurações
+
+
+---
+
 ## Contribuição
 
 1. Fork o projeto.
