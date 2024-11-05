@@ -158,7 +158,7 @@ npm start
 
 - [x] **Adicionar Cabeçalho e Rodapé**
 - [x] **Adicionar Menu ao Cabeçalho e Centralizar**
-- [ ] **Temas e Paletas de Cores**
+- [x] **Temas e Paletas de Cores**
   - Escolher uma paleta de cores consistente
   - Oferecer tema claro e escuro
 - [ ] **Layout Responsivo**
