@@ -46,10 +46,14 @@ function detectLanguage(code) {
 
 async function analyzeJavaScript(code) {
   try {
+    const { default: stripAnsi } = await import('strip-ansi');
     const eslint = new ESLint();
     const results = await eslint.lintText(code);
     const formatter = await eslint.loadFormatter("stylish");
-    const formattedResults = formatter.format(results);
+    let formattedResults = formatter.format(results);
+
+    // Remover códigos ANSI
+    formattedResults = stripAnsi(formattedResults);
 
     if (results.length === 0) {
       return `<div style="color: green; font-weight: bold;">Nenhum problema encontrado.</div>
