@@ -95,7 +95,7 @@ npm start
 ## Lembretes
 
 - Certifique-se de estar no ambiente virtual Python antes de iniciar o servidor.
-- Atualize as dependências regularmente com npm install e pip install.
+- Atualize as dependências regularmente com `npm install` e `pip install`.
 
 ## Contribuição
 
