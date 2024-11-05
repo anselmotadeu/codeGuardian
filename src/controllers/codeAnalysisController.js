@@ -1,35 +1,37 @@
-const ESLint = require('eslint').ESLint;
-const exec = require('child_process').exec;
-const HTMLHint = require('htmlhint').HTMLHint;
-const stylelint = require('stylelint');
-const detectLang = require('lang-detector');
+const ESLint = require("eslint").ESLint;
+const exec = require("child_process").exec;
+const HTMLHint = require("htmlhint").HTMLHint;
+const stylelint = require("stylelint");
+const detectLang = require("lang-detector");
 
-const supportedLanguages = ['JavaScript', 'Python', 'HTML', 'CSS'];
+const supportedLanguages = ["JavaScript", "Python", "HTML", "CSS"];
 const modeMap = {
-  'JavaScript': 'javascript',
-  'Python': 'python',
-  'HTML': 'html',
-  'CSS': 'css'
+  JavaScript: "javascript",
+  Python: "python",
+  HTML: "html",
+  CSS: "css",
 };
 
 exports.analyzeCode = async (req, res) => {
   const code = req.body.code;
   let language = detectLanguage(code);
 
-  console.log('Detected Language:', language); // Para depuração
+  console.log("Detected Language:", language); // Para depuração
 
   try {
-    let resultText = '';
-    if (language === 'JavaScript') {
+    let resultText = "";
+    if (language === "JavaScript") {
       resultText = await analyzeJavaScript(code);
-    } else if (language === 'Python') {
+    } else if (language === "Python") {
       resultText = await analyzePython(code);
-    } else if (language === 'HTML') {
+    } else if (language === "HTML") {
       resultText = analyzeHTML(code);
-    } else if (language === 'CSS') {
+    } else if (language === "CSS") {
       resultText = await analyzeCSS(code);
     } else {
-      return res.status(400).json({ error: `Unsupported language: ${language}` });
+      return res
+        .status(400)
+        .json({ error: `Unsupported language: ${language}` });
     }
 
     res.json({ analysis: resultText, language: modeMap[language] });
@@ -40,13 +42,13 @@ exports.analyzeCode = async (req, res) => {
 
 function detectLanguage(code) {
   const language = detectLang(code);
-  console.log('Detected Language:', language); // Para depuração
-  return supportedLanguages.includes(language) ? language : 'unknown';
+  console.log("Detected Language:", language); // Para depuração
+  return supportedLanguages.includes(language) ? language : "unknown";
 }
 
 async function analyzeJavaScript(code) {
   try {
-    const { default: stripAnsi } = await import('strip-ansi');
+    const { default: stripAnsi } = await import("strip-ansi");
     const eslint = new ESLint();
     const results = await eslint.lintText(code);
     const formatter = await eslint.loadFormatter("stylish");
@@ -55,32 +57,41 @@ async function analyzeJavaScript(code) {
     // Remover códigos ANSI
     formattedResults = stripAnsi(formattedResults);
 
+    // Estilizar a mensagem de linting
+    formattedResults = formattedResults
+      .replace(/(\d+ problems?)/, '<strong style="color:blue;">$1</strong>')
+      .replace(/(\d+ errors?)/, '<strong style="color:red;">$1</strong>')
+      .replace(/(\d+ warnings?)/, '<strong style="color:orange;">$1</strong>');
+
     if (results.length === 0) {
       return `<div style="color: green; font-weight: bold;">Nenhum problema encontrado.</div>
               <div>O código foi analisado e está seguindo todas as boas práticas.</div>`;
     } else {
-      return formattedResults.replace(/\n/g, '<br>');
+      return formattedResults.replace(/\n/g, "<br>");
     }
   } catch (error) {
-    console.error('Error in JavaScript analysis:', error);
+    console.error("Error in JavaScript analysis:", error);
     throw error;
   }
 }
 
 function analyzePython(code) {
   return new Promise((resolve, reject) => {
-    exec(`echo "${code}" | python3 pylint_analysis.py`, (error, stdout, stderr) => {
-      if (error) {
-        reject(error);
-      } else {
-        if (stdout.trim() === '') {
-          resolve(`<div style="color: green; font-weight: bold;">Nenhum problema encontrado.</div>
-                   <div>O código foi analisado e está seguindo todas as boas práticas.</div>`);
+    exec(
+      `echo "${code}" | python3 pylint_analysis.py`,
+      (error, stdout, stderr) => {
+        if (error) {
+          reject(error);
         } else {
-          resolve(stdout.replace(/\n/g, '<br>'));
+          if (stdout.trim() === "") {
+            resolve(`<div style="color: green; font-weight: bold;">Nenhum problema encontrado.</div>
+                   <div>O código foi analisado e está seguindo todas as boas práticas.</div>`);
+          } else {
+            resolve(stdout.replace(/\n/g, "<br>"));
+          }
         }
-      }
-    });
+      },
+    );
   });
 }
 
@@ -99,14 +110,16 @@ function analyzeHTML(code) {
   } else {
     return `<div class="error-message">Problemas encontrados:</div>
             <ul>
-              ${results.map(issue => `<li><strong>Linha ${issue.line}, Coluna ${issue.col}</strong>: ${issue.message}</li>`).join('')}
+              ${results.map((issue) => `<li><strong>Linha ${issue.line}, Coluna ${issue.col}</strong>: ${issue.message}</li>`).join("")}
             </ul>`;
   }
 }
 
 async function analyzeCSS(code) {
   const results = await stylelint.lint({ code });
-  const formattedResults = results.results[0].warnings.map(warning => `${warning.line}:${warning.column} - ${warning.text}`).join('<br>');
+  const formattedResults = results.results[0].warnings
+    .map((warning) => `${warning.line}:${warning.column} - ${warning.text}`)
+    .join("<br>");
 
   if (results.results[0].warnings.length === 0) {
     return `<div style="color: green; font-weight: bold;">Nenhum problema encontrado.</div>
