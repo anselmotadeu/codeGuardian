@@ -161,7 +161,7 @@ npm start
 - [x] **Temas e Paletas de Cores**
   - Escolher uma paleta de cores consistente
   - Oferecer tema claro e escuro
-- [ ] **Layout Responsivo**
+- [x] **Layout Responsivo**
   - Garantir que a aplicação funcione bem em diferentes tamanhos de tela (desktop, tablet, smartphone)
 - [ ] **Configurações de Lint**
   - Permitir ao usuário ajustar regras e configurações do lint
